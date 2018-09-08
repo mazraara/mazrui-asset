@@ -18,7 +18,7 @@ class ProductController extends Controller
         try {
             $product = Product::paginate(Product::PAGINATION_COUNT);
 
-            return response()->success($product);
+            return response()->json($product);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
         }
@@ -52,7 +52,7 @@ class ProductController extends Controller
             $book = Product::create($request->all());
 
             if ($book) {
-                return response()->success($book, 200);
+                return response()->json($book, 200);
             } else {
                 return response()->error($book, 400);
             }
@@ -70,7 +70,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         try {
-            return response()->success($product);
+            return response()->json($product);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
         }
@@ -99,7 +99,7 @@ class ProductController extends Controller
         try {
             $product = Product::findorFail($id);
             $product = $product->update($request->all());
-            return response()->success($product);
+            return response()->json($product);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
         }
@@ -116,7 +116,7 @@ class ProductController extends Controller
         try {
             $product = Product::find($id);
             $result  = $product->delete();
-            return response()->success($result);
+            return response()->json($result);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
         }
