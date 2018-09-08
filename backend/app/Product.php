@@ -3,10 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use SoftDeletes;
+
+    /**
+     * The number of models to return for pagination.
+     *
+     * @var int
+     */
+    const PAGINATION_COUNT = 10;
 
     /**
      * type of the "status" column.
@@ -55,7 +63,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'type', 'status'];
+    protected $fillable = ['label', 'description', 'type', 'status'];
 
     /**
      * The attributes that should be mutated to dates.
