@@ -22,13 +22,19 @@
     <div class="form-group">
       <div class="col-md-12">
         <label for="type">Type</label>
-        <input type="text" class="form-control" placeholder="Type" [(ngModel)]="productData.type" name="type" required/>
+        <select [(ngModel)]="productData.type" id="type" name="type" class="form-control" required>
+          <option value="" disabled selected>select a type</option>
+          <option *ngFor="let item of types" [value]="item.id">{{item.name}}</option>
+        </select>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-12">
         <label for="status">Status</label>
-        <input type="text" class="form-control" placeholder="Status" [(ngModel)]="productData.status" name="status" required/>
+        <select [(ngModel)]="productData.status" id="status" name="status" class="form-control" required>
+          <option value="" disabled selected>select a status</option>
+          <option *ngFor="let item of status" [value]="item.id">{{item.name}}</option>
+        </select>
       </div>
     </div>
     <div class="form-group">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -43,19 +44,24 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->validate($request, [
+
+            $validator = Validator::make($request->all(), [
                 'label' => 'required',
                 'description' => 'required',
                 'type' => 'required',
                 'status' => 'required',
             ]);
-            $book = Product::create($request->all());
 
-            if ($book) {
-                return response()->json($book, 200);
-            } else {
-                return response()->error($book, 400);
+            if ($validator->fails()) {
+                $errors = $validator->errors()->all();
+                $error["message"] = $errors[0];
+
+                return response()->json($error, 400);
             }
+
+            $product = Product::create($request->all());
+
+            return response()->json($product, 200);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
         }
@@ -99,6 +105,7 @@ class ProductController extends Controller
         try {
             $product = Product::findorFail($id);
             $product = $product->update($request->all());
+
             return response()->json($product);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
@@ -115,7 +122,8 @@ class ProductController extends Controller
     {
         try {
             $product = Product::find($id);
-            $result  = $product->delete();
+            $result = $product->delete();
+
             return response()->json($result);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());

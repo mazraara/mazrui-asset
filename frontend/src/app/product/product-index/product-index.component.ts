@@ -14,7 +14,7 @@ export class ProductIndexComponent implements OnInit {
   products = [];
   errMesg: any;
   totalRecords = 0;
-  pageSize = 5;
+  pageSize = 10;
 
   constructor(
     private spinnerService: Ng4LoadingSpinnerService, 

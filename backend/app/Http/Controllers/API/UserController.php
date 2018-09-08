@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         try {
             $oUser = User::where('id', Auth::user()->id)->first();
-            return response()->success($oUser);
+            return response()->json($oUser);
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
         }
@@ -32,7 +32,7 @@ class UserController extends Controller
         try {
             if (Auth::check()) {
                 $result = Auth::user()->authAcessToken()->delete();
-                return response()->success($result);
+                return response()->json($result);
             }
         } catch (Exception $e) {
             return response()->exception($e->getMessage(), $e->getCode());
