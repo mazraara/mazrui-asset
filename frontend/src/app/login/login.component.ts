@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         this.spinnerService.show();
         this.authService.login(this.loginData).subscribe((value) => {
             this.loginService.getMe().subscribe((value) => {
-                localStorage.setItem('userInfo', JSON.stringify(value.data))
+                localStorage.setItem('userInfo', JSON.stringify(value))
                 console.log(JSON.parse(localStorage.getItem('userInfo')).name);
                 this.spinnerService.hide();
                 this.notificationService.onSuccess('Welcome...' + JSON.parse(localStorage.getItem('userInfo')).name)
@@ -42,10 +42,10 @@ export class LoginComponent implements OnInit {
             });
         }, err => {
             this.spinnerService.hide();
-            if (err.status_code == 422) {
+            if (err.status_code === 422) {
                 this.errMsgArr = this.formValidationService.getErrors(err.errors);
             } else {
-                this.errMsgArr = [err.error.message]
+                this.errMsgArr = [err.error.message];
             }
         });
     }

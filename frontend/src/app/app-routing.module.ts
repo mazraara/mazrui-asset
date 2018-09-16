@@ -3,8 +3,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {PublicGuard, ProtectedGuard} from 'ngx-auth';
-import {ProductAddComponent} from "./product/product-add/product-add.component";
-import {ProductIndexComponent} from "./product/product-index/product-index.component";
+import {ProductAddComponent} from './product/product-add/product-add.component';
+import {ProductIndexComponent} from './product/product-index/product-index.component';
 
 const routes: Routes = [
     {
